@@ -63,6 +63,23 @@ public class Professor {
         } else if (!codigo.equals(other.codigo))
             return false;
         return true;
+    }   
+
+    @Override
+    public String toString() {
+        return "{" +
+            " codigo='" + getCodigo() + "'" +
+            ", nome='" + getNome() + "'" +
+            ", materia='" + getMateria() + "'" +
+            "}";
+    }
+
+    public Professor() {}
+
+    public Professor(Long codigo, String nome, String materia) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.materia = materia;
     }
 
 }
