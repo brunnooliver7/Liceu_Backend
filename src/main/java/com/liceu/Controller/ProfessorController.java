@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/professores")
 public class ProfessorController {
@@ -37,10 +36,10 @@ public class ProfessorController {
         return professorRepository.findAll();
     }
 
-    @GetMapping("/{codigo}")
-    public ResponseEntity<Professor> findOne(@PathVariable Long codigo) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Professor> findOne(@PathVariable Long id) {
 
-        Optional<Professor> professor = professorRepository.findById(codigo);
+        Optional<Professor> professor = professorRepository.findById(id);
        
         if (professor.isPresent()) {
             return new ResponseEntity<>(professor.get(), HttpStatus.OK);
@@ -55,15 +54,15 @@ public class ProfessorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(professorSalvo);
     }
     
-    @DeleteMapping("/{codigo}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long codigo) {
-        professorRepository.deleteById(codigo);
+    public void delete(@PathVariable Long id) {
+        professorRepository.deleteById(id);
     }
 
-    @PutMapping("/{codigo}")
-    public ResponseEntity<Professor> atualizar(@PathVariable Long codigo, @Validated @RequestBody Professor professor) {
-        Professor professorSalvo = professorService.atualizar(codigo, professor);
+    @PutMapping("/{id}")
+    public ResponseEntity<Professor> atualizar(@PathVariable Long id, @Validated @RequestBody Professor professor) {
+        Professor professorSalvo = professorService.atualizar(id, professor);
         return ResponseEntity.ok(professorSalvo);
     }
 
