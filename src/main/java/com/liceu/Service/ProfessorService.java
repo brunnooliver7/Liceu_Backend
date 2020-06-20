@@ -14,17 +14,17 @@ public class ProfessorService {
     @Autowired
     private ProfessorRepository professorRepository;
 
-    public Professor buscarProfessorPeloCodigo(Long codigo) {
-        Professor professorSalvo = professorRepository.getOne(codigo);
+    public Professor buscarProfessorPeloCodigo(Long id) {
+        Professor professorSalvo = professorRepository.getOne(id);
         if (professorSalvo == null) {
             throw new EmptyResultDataAccessException("Professor não encontrado", 1);
         }
         return professorSalvo;
     }
 
-    public Professor atualizar(Long codigo, Professor professor) {
-        Professor professorSalvo = buscarProfessorPeloCodigo(codigo);
-        BeanUtils.copyProperties(professor, professorSalvo, "codigo");
+    public Professor atualizar(Long id, Professor professor) {
+        Professor professorSalvo = buscarProfessorPeloCodigo(id);
+        BeanUtils.copyProperties(professor, professorSalvo, "id");
         return professorRepository.save(professorSalvo);
     }
 

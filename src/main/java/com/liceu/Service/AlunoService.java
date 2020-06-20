@@ -14,17 +14,17 @@ public class AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
-    public Aluno buscarAlunoPeloCodigo(Long codigo) {
-        Aluno alunoSalvo = alunoRepository.getOne(codigo);
+    public Aluno buscarAlunoPeloCodigo(Long id) {
+        Aluno alunoSalvo = alunoRepository.getOne(id);
         if (alunoSalvo == null) {
             throw new EmptyResultDataAccessException("Aluno não encontrado", 1);
         }
         return alunoSalvo;
     }
 
-    public Aluno atualizar(Long codigo, Aluno aluno) {
-        Aluno alunoSalvo = buscarAlunoPeloCodigo(codigo);
-        BeanUtils.copyProperties(aluno, alunoSalvo, "codigo");
+    public Aluno atualizar(Long id, Aluno aluno) {
+        Aluno alunoSalvo = buscarAlunoPeloCodigo(id);
+        BeanUtils.copyProperties(aluno, alunoSalvo, "id");
         return alunoRepository.save(alunoSalvo);
     }
     

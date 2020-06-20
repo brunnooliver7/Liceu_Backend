@@ -36,10 +36,10 @@ public class AlunoController {
         return alunoRepository.findAll();
     }
 
-    @GetMapping("/{codigo}") 
-    public ResponseEntity<Aluno> findOne(@PathVariable Long codigo) {
+    @GetMapping("/{id}") 
+    public ResponseEntity<Aluno> findOne(@PathVariable Long id) {
 
-        Optional<Aluno> aluno = alunoRepository.findById(codigo);
+        Optional<Aluno> aluno = alunoRepository.findById(id);
         
         if (aluno.isPresent()) {
             return new ResponseEntity<>(aluno.get(), HttpStatus.OK);
@@ -54,15 +54,15 @@ public class AlunoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoSalvo);
     }
     
-    @DeleteMapping("/{codigo}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long codigo) {
-        alunoRepository.deleteById(codigo);
+    public void delete(@PathVariable Long id) {
+        alunoRepository.deleteById(id);
     }
 
-    @PutMapping("/{codigo}")
-    public ResponseEntity<Aluno> atualizar(@PathVariable Long codigo, @Validated @RequestBody Aluno aluno) {
-        Aluno alunoSalvo = alunoService.atualizar(codigo, aluno);
+    @PutMapping("/{id}")
+    public ResponseEntity<Aluno> atualizar(@PathVariable Long id, @Validated @RequestBody Aluno aluno) {
+        Aluno alunoSalvo = alunoService.atualizar(id, aluno);
         return ResponseEntity.ok(alunoSalvo);
     }
 
