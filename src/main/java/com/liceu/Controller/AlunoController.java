@@ -1,5 +1,6 @@
 package com.liceu.Controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import com.liceu.Repository.AlunoRepository;
 import com.liceu.Service.AlunoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -31,9 +33,12 @@ public class AlunoController {
     @Autowired
     public AlunoService alunoService;
 
+    @Autowired
+    public Environment env;
+
     @GetMapping
-    public List<Aluno> findAll() {
-        return alunoRepository.findAll();
+    public ResponseEntity<List<Aluno>> findAll() {
+        return new ResponseEntity<List<Aluno>>(alunoRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}") 
@@ -56,8 +61,13 @@ public class AlunoController {
     
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        alunoRepository.deleteById(id);
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        if (Arrays.asList(env.getActiveProfiles()).contains("admin")) {
+            alunoRepository.deleteById(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Aluno deletado com sucesso");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você não tem permissão para executar este comando");
+        }
     }
 
     @PutMapping("/{id}")
