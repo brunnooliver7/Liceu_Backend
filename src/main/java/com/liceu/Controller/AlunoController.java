@@ -36,12 +36,12 @@ public class AlunoController {
     @Autowired
     public Environment env;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<Aluno>> findAll() {
         return new ResponseEntity<List<Aluno>>(alunoRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Aluno> findOne(@PathVariable Long id) {
         Optional<Aluno> aluno = alunoRepository.findById(id);
         if (aluno.isPresent()) {

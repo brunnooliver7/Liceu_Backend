@@ -9,6 +9,7 @@ import com.liceu.Service.ProfessorService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,16 +32,14 @@ public class ProfessorController {
     @Autowired
     public ProfessorService professorService;
 
-    @GetMapping
+    @GetMapping (produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public List<Professor> findAll() {
         return professorRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping (value = "/{id}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Professor> findOne(@PathVariable Long id) {
-
         Optional<Professor> professor = professorRepository.findById(id);
-       
         if (professor.isPresent()) {
             return new ResponseEntity<>(professor.get(), HttpStatus.OK);
         } else {
