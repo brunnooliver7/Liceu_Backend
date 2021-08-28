@@ -60,13 +60,12 @@ public class AlunoController {
     }
     
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<String> delete(@PathVariable Long id) {
         if (Arrays.asList(env.getActiveProfiles()).contains("admin")) {
             alunoRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Aluno deletado com sucesso");
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Você não tem permissão para executar este comando");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Seu perfil não tem permissão para executar este comando");
         }
     }
 
