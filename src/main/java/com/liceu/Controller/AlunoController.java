@@ -11,6 +11,7 @@ import com.liceu.Service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,16 +36,14 @@ public class AlunoController {
     @Autowired
     public Environment env;
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Aluno>> findAll() {
         return new ResponseEntity<List<Aluno>>(alunoRepository.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}") 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Aluno> findOne(@PathVariable Long id) {
-
         Optional<Aluno> aluno = alunoRepository.findById(id);
-        
         if (aluno.isPresent()) {
             return new ResponseEntity<>(aluno.get(), HttpStatus.OK);
         } else {
