@@ -1,11 +1,10 @@
 package com.liceu.Service;
 
+import com.liceu.Exception.EntidadeNaoEncontradaException;
 import com.liceu.Model.Professor;
 import com.liceu.Repository.ProfessorRepository;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,18 +13,18 @@ public class ProfessorService {
     @Autowired
     private ProfessorRepository professorRepository;
 
-    public Professor buscarProfessorPeloCodigo(Long id) {
-        Professor professorSalvo = professorRepository.getOne(id);
-        if (professorSalvo == null) {
-            throw new EmptyResultDataAccessException("Professor não encontrado", 1);
+    public Professor findOne(Long id) {
+        return professorRepository.findById(id).orElseThrow(() -> new EntidadeNaoEncontradaException(
+            String.format("Não existe cadastro de professor com código %d", id)));
+    }
+
+    public void delete(Long id) {
+        try {
+            professorRepository.deleteById(id);
+        } catch (Exception e) {
+			throw new EntidadeNaoEncontradaException(
+                String.format("Não existe um cadastro de professor com código %d", id));
         }
-        return professorSalvo;
     }
-
-    public Professor atualizar(Long id, Professor professor) {
-        Professor professorSalvo = buscarProfessorPeloCodigo(id);
-        BeanUtils.copyProperties(professor, professorSalvo, "id");
-        return professorRepository.save(professorSalvo);
-    }
-
+    
 }
