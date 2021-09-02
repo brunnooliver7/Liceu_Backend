@@ -59,7 +59,7 @@ public class AlunoController {
         return new ResponseEntity<Aluno>(alunoSalvo, HttpStatus.CREATED);
     }
     
-    @PutMapping("/{id}")
+    @PutMapping ("/{id}")
     public ResponseEntity<Aluno> update(@PathVariable Long id, @RequestBody Aluno aluno) {
         Optional<Aluno> alunoAtual = alunoRepository.findById(id);
         if (alunoAtual.isPresent()) {
@@ -70,7 +70,7 @@ public class AlunoController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping ("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
         if (Arrays.asList(env.getActiveProfiles()).contains("admin")) {
             try {

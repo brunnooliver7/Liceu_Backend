@@ -23,7 +23,7 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonProperty("nomeAluno")
+    @JsonProperty("nome")
     private String nome;
 
     private int matricula;
