@@ -25,8 +25,8 @@ public class TesteController {
     @Autowired
     private AulaRepository aulaRepository;
 
-    @GetMapping ("/aluno/nome")
-    public List<Aluno> listarAlunosPorNome(String nome) {
+    @GetMapping ("/aluno/todos-nome")
+    public List<Aluno> listarTodosAlunosPorNome(String nome) {
         return alunoRepository.findAllByNome(nome);
     }
 
@@ -35,17 +35,17 @@ public class TesteController {
         return alunoRepository.findAllByNomeContaining(nome);
     }
 
-    @GetMapping ("/aluno/unico-nome")
-    public Optional<Aluno> listarAlunoPorNome(String nome) {
+    @GetMapping ("/aluno/nome-exato")
+    public Optional<Aluno> listarAlunoPorNomeExato(String nome) {
         return alunoRepository.findByNome(nome);
     }
 
-    @GetMapping ("/aluno/primeiro-nome")
+    @GetMapping ("/aluno/primeiro-aluno-nome")
     public Optional<Aluno> listarPrimeiroAlunoPorNome(String nome) {
         return alunoRepository.findFirstByNome(nome);
     }
 
-    @GetMapping ("/aluno/por-primeiro-nome-contem")
+    @GetMapping ("/aluno/primeiro-nome-contem")
     public Optional<Aluno> listarPrimeiroAlunoPorNomeQueContem(String nome) {
         return alunoRepository.findFirstByNomeContaining(nome);
     }
@@ -65,7 +65,7 @@ public class TesteController {
         return alunoRepository.countByNomeContaining(nome);
     }
 
-    @GetMapping ("aula/por-dia-entre")
+    @GetMapping ("aula/dia-entre")
     public List<Aula> listarAulasPorDataEntre(
         @DateTimeFormat(pattern="ddMMyyyy") Date dataInicial, 
         @DateTimeFormat(pattern="ddMMyyyy") Date dataFinal
@@ -73,4 +73,13 @@ public class TesteController {
         return aulaRepository.findByDiaBetween(dataInicial, dataFinal);
     }
 
+    @GetMapping ("/aluno/query-nome-exato")
+    public Aluno consultarPorNomeExatoXml(String nome) {
+        return alunoRepository.consultarPorNome(nome);
+    }
+
+    @GetMapping ("/aluno/query-nome-contem")
+    public List<Aluno> consultarPorNomeExatoRepositoryImpl(String nome) {
+        return alunoRepository.findNomeContem(nome);
+    }
 }

@@ -6,7 +6,7 @@ import java.util.Optional;
 import com.liceu.Model.Aluno;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AlunoRepository extends JpaRepository<Aluno, Long> {
+public interface AlunoRepository extends JpaRepository<Aluno, Long>, AlunoRepositoryQueries {
     List<Aluno> findAllByNome(String nome);
     List<Aluno> findAllByNomeContaining(String nome);
     Optional<Aluno> findByNome(String nome);
@@ -16,4 +16,5 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     List<Aluno> findTop2ByNomeContaining(String nome);
     int countByNome(String nome);
     int countByNomeContaining(String nome);
+    Aluno consultarPorNome(String nome);
 }
