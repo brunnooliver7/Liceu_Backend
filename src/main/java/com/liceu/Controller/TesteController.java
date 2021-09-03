@@ -79,7 +79,7 @@ public class TesteController {
     }
 
     @GetMapping ("/aluno/query-nome-contem")
-    public List<Aluno> consultarPorNomeExatoRepositoryImpl(String nome) {
-        return alunoRepository.findNomeContem(nome);
+    public List<Aluno> consultarPorNomeRepositoryImpl(String nome) {
+        return alunoRepository.findNomeContemCriteriaDinamico(nome);
     }
 }
