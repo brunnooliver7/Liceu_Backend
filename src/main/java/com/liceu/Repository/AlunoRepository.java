@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     List<Aluno> findAllByNome(String nome);
+    List<Aluno> findAllByNomeContaining(String nome);
     Optional<Aluno> findByNome(String nome);
 }
