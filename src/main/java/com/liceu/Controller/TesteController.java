@@ -25,14 +25,44 @@ public class TesteController {
     @Autowired
     private AulaRepository aulaRepository;
 
-    @GetMapping ("/aluno/por-nome")
+    @GetMapping ("/aluno/nome")
     public List<Aluno> listarAlunosPorNome(String nome) {
+        return alunoRepository.findAllByNome(nome);
+    }
+
+    @GetMapping ("/aluno/nome-contem")
+    public List<Aluno> listarAlunosPorNomeContem(String nome) {
         return alunoRepository.findAllByNomeContaining(nome);
     }
 
-    @GetMapping ("aluno/por-nome-unico")
-    public Optional<Aluno> listarAlunoPorNomeUnico(String nome) {
+    @GetMapping ("/aluno/unico-nome")
+    public Optional<Aluno> listarAlunoPorNome(String nome) {
         return alunoRepository.findByNome(nome);
+    }
+
+    @GetMapping ("/aluno/primeiro-nome")
+    public Optional<Aluno> listarPrimeiroAlunoPorNome(String nome) {
+        return alunoRepository.findFirstByNome(nome);
+    }
+
+    @GetMapping ("/aluno/por-primeiro-nome-contem")
+    public Optional<Aluno> listarPrimeiroAlunoPorNomeQueContem(String nome) {
+        return alunoRepository.findFirstByNomeContaining(nome);
+    }
+
+    @GetMapping ("/aluno/existe")
+    public Optional<Aluno> listarAlunoExiste(String nome) {
+        return alunoRepository.existsByNome(nome);
+    }
+
+    @GetMapping ("/aluno/contar-nome")
+    public int contarPorNome(String nome) {
+        return alunoRepository.countByNome(nome);
+    }
+
+    @GetMapping ("/aluno/contar-nome-contem")
+    public int contarPorNomeQueContem(String nome) {
+        return alunoRepository.countByNomeContaining(nome);
     }
 
     @GetMapping ("aula/por-dia-entre")
