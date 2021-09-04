@@ -9,6 +9,9 @@ import com.liceu.Model.Aula;
 import com.liceu.Repository.AlunoRepository;
 import com.liceu.Repository.AulaRepository;
 
+import static com.liceu.Repository.Spec.AlunoSpecs.comBolsaIntegral;
+import static com.liceu.Repository.Spec.AlunoSpecs.comNomeSemelhante;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,5 +84,10 @@ public class TesteController {
     @GetMapping ("/aluno/query-nome-contem")
     public List<Aluno> consultarPorNomeRepositoryImpl(String nome) {
         return alunoRepository.findNomeContemCriteriaDinamico(nome);
+    }
+
+    @GetMapping ("/aluno/bolsa-integral-nome-semelhante")
+    public List<Aluno> consultarPorBolsaIntegralENomeSemelhante(String nome) {
+        return alunoRepository.findAll(comBolsaIntegral().and(comNomeSemelhante(nome)));
     }
 }

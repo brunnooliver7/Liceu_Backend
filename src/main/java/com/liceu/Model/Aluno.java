@@ -28,4 +28,7 @@ public class Aluno {
 
     private int matricula;
 
+    private int classificacao;
+
+    private Double mensalidade;
 }
