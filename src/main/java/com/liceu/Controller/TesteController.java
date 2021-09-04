@@ -90,4 +90,9 @@ public class TesteController {
     public List<Aluno> consultarPorBolsaIntegralENomeSemelhante(String nome) {
         return alunoRepository.findAll(comBolsaIntegral().and(comNomeSemelhante(nome)));
     }
+
+    @GetMapping ("/aluno/primeiro")
+    public Optional<Aluno> primeiroAluno() {
+        return alunoRepository.buscarPrimeiro();
+    }
 }

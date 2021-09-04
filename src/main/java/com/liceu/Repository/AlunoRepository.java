@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.liceu.Model.Aluno;
-import org.springframework.data.jpa.repository.JpaRepository;
+
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface AlunoRepository extends JpaRepository<Aluno, Long>, AlunoRepositoryQueries, JpaSpecificationExecutor<Aluno> {
+public interface AlunoRepository extends CustomJpaRepository<Aluno, Long>, AlunoRepositoryQueries, JpaSpecificationExecutor<Aluno> {
     List<Aluno> findAllByNome(String nome);
     List<Aluno> findAllByNomeContaining(String nome);
     Optional<Aluno> findByNome(String nome);
