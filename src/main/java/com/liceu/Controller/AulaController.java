@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/aula")
 public class AulaController {
-    
+
     @Autowired
     public AulaRepository aulaRepository;
 
@@ -37,13 +37,13 @@ public class AulaController {
     @Autowired
     public Environment env;
 
-    @GetMapping (produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public ResponseEntity<List<Aula>> findAll() {
         List<Aula> aulas = aulaRepository.findAll();
         return new ResponseEntity<List<Aula>>(aulas, HttpStatus.OK);
     }
 
-    @GetMapping (value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public ResponseEntity<?> findOne(@PathVariable Long id) {
         try {
             Aula aula = aulaService.findOne(id);
@@ -54,11 +54,11 @@ public class AulaController {
     }
 
     @PostMapping
-    public ResponseEntity<Aula> save(@RequestBody Aula aula) {        
+    public ResponseEntity<Aula> save(@RequestBody Aula aula) {
         Aula aulaSalva = aulaRepository.save(aula);
         return new ResponseEntity<Aula>(aulaSalva, HttpStatus.CREATED);
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<Aula> update(@PathVariable Long id, @RequestBody Aula aula) {
         Optional<Aula> aulaAtual = aulaRepository.findById(id);
@@ -80,8 +80,9 @@ public class AulaController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
             }
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Seu perfil não tem permissão para executar este comando");
-        }    
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Seu perfil não tem permissão para executar este comando");
+        }
     }
-    
+
 }

@@ -1,5 +1,8 @@
 package com.liceu.Controller;
 
+import static com.liceu.Repository.Spec.AlunoSpecs.comBolsaIntegral;
+import static com.liceu.Repository.Spec.AlunoSpecs.comNomeSemelhante;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +11,6 @@ import com.liceu.Model.Aluno;
 import com.liceu.Model.Aula;
 import com.liceu.Repository.AlunoRepository;
 import com.liceu.Repository.AulaRepository;
-
-import static com.liceu.Repository.Spec.AlunoSpecs.comBolsaIntegral;
-import static com.liceu.Repository.Spec.AlunoSpecs.comNomeSemelhante;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
