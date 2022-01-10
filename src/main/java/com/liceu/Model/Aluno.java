@@ -1,5 +1,7 @@
 package com.liceu.Model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,5 +32,5 @@ public class Aluno {
 
     private int classificacao;
 
-    private Double mensalidade;
+    private BigDecimal mensalidade;
 }

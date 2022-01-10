@@ -29,8 +29,9 @@ public class Aula {
     private Date dia;
 
     @ManyToOne
-    private Professor professor;
-
+    @JoinColumn(name = "materia_id", nullable = false)
+    private Materia materia;
+  
     @ManyToMany
     @JoinTable(
         name="aula_aluno",
