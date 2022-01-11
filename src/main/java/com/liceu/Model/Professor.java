@@ -3,6 +3,7 @@ package com.liceu.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -34,4 +35,7 @@ public class Professor {
     @JsonIgnore
     @OneToMany(mappedBy = "professor")
     private List<Materia> materias = new ArrayList<>();
+
+    @Embedded
+    private Sala sala;
 }
