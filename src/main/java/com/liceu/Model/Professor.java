@@ -32,10 +32,11 @@ public class Professor {
     @JsonProperty("nome")
     private String nome;
     
-    @JsonIgnore
+    // @JsonIgnore
     @OneToMany(mappedBy = "professor")
     private List<Materia> materias = new ArrayList<>();
 
     @Embedded
+    @JsonIgnore
     private Sala sala;
 }

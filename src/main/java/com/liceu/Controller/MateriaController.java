@@ -62,7 +62,7 @@ public class MateriaController {
     public ResponseEntity<Materia> update(@PathVariable Long id, @RequestBody Materia materia) {
         Optional<Materia> materiaAtual = materiaRepository.findById(id);
         if (materiaAtual.isPresent()) {
-            BeanUtils.copyProperties(materia, materiaAtual.get(), "id");
+            BeanUtils.copyProperties(materia, materiaAtual.get(), "id", "professor");
             Materia materiaSalva = materiaRepository.save(materiaAtual.get());
             return ResponseEntity.ok(materiaSalva);
         }
