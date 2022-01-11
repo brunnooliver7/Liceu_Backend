@@ -63,7 +63,7 @@ public class AlunoController {
     public ResponseEntity<Aluno> update(@PathVariable Long id, @RequestBody Aluno aluno) {
         Optional<Aluno> alunoAtual = alunoRepository.findById(id);
         if (alunoAtual.isPresent()) {
-            BeanUtils.copyProperties(aluno, alunoAtual.get(), "id");
+            BeanUtils.copyProperties(aluno, alunoAtual.get(), "id", "aulas");
             Aluno alunoSalvo = alunoRepository.save(alunoAtual.get());
             return ResponseEntity.ok(alunoSalvo);
         }
