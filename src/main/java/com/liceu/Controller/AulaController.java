@@ -40,6 +40,8 @@ public class AulaController {
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
     public ResponseEntity<List<Aula>> findAll() {
         List<Aula> aulas = aulaRepository.findAll();
+        System.out.println("o nome da matéria e: ");
+        System.out.println(aulas.get(0).getMateria().getNome());
         return new ResponseEntity<List<Aula>>(aulas, HttpStatus.OK);
     }
 
