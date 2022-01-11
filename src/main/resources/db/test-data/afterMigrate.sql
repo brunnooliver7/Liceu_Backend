@@ -20,11 +20,11 @@ insert ignore into aluno (id, nome, matricula, classificacao, mensalidade) value
 (4, 'Daniel Ramos', 4, 2, 2400.89),
 (5, 'Emanuel Werneck', 5, 5, 1750.23);
 
-insert ignore into professor (id, nome, sala_bloco, sala_andar, sala_numero) values 
-(1, 'André Brasil', 'A', 1, 1),
-(2, 'Marcos Honorato', 'C', 1, 2),
-(3, 'Gilberto Gomes', 'B', 2, 5),
-(4, 'Raul Durand', 'C', 2, 8);
+insert ignore into professor (id, nome, sala_bloco, sala_andar, sala_numero, data_cadastro, data_atualizacao) values 
+(1, 'André Brasil', 'A', 1, 1, utc_timestamp, utc_timestamp),
+(2, 'Marcos Honorato', 'C', 1, 2, utc_timestamp, utc_timestamp),
+(3, 'Gilberto Gomes', 'B', 2, 5, utc_timestamp, utc_timestamp),
+(4, 'Raul Durand', 'C', 2, 8, utc_timestamp, utc_timestamp);
 
 insert ignore into materia (id, nome, professor_id) values
 (1, 'Geotecnia', 1),

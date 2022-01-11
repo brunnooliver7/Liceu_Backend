@@ -63,7 +63,7 @@ public class ProfessorController {
     public ResponseEntity<Professor> update(@PathVariable Long id, @RequestBody Professor professor) {
         Optional<Professor> professorAtual = professorRepository.findById(id);
         if (professorAtual.isPresent()) {
-            BeanUtils.copyProperties(professor, professorAtual.get(), "id", "sala");
+            BeanUtils.copyProperties(professor, professorAtual.get(), "id", "sala", "dataCadastro");
             Professor professorSalvo = professorRepository.save(professorAtual.get());
             return ResponseEntity.ok(professorSalvo);
         }
