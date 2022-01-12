@@ -1,17 +1,19 @@
 package com.liceu.Model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -38,6 +40,10 @@ public class Aluno {
     private BigDecimal mensalidade;
 
     @ManyToMany
-    @JsonIgnore
-    private List<Aula> aulas;
+    @JoinTable(
+        name = "aula_aluno",
+        joinColumns = @JoinColumn(name = "aluno_id"), 
+        inverseJoinColumns = @JoinColumn(name = "aula_id")
+    )
+    private List<Aula> aulas = new ArrayList<>();
 }

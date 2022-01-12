@@ -38,6 +38,7 @@ public class Aula {
     private Materia materia;
   
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
         name="aula_aluno",
         joinColumns=@JoinColumn(name="aula_id"), 
